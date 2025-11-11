@@ -22,48 +22,61 @@ $(document).ready(function() {
     ];
 
     
+   
     var currentCardIndex;
     var isShowingAnswer = false;
     
     // Инициализация
     $('.flashcard').hide();
     $('#flipCard').hide();
+    $('#flipCard-mobile').hide();
 
     // Функция для получения случайной карточки
     function getRandomCard() {
         return Math.floor(Math.random() * cards.length);
     }
 
-    // Обработчик кнопки "Загадать блюдо"
-    $('#question').on('click', function() {
+    // Общая функция для показа карточки
+    function showCard() {
         currentCardIndex = getRandomCard();
         var displayCard = cards[currentCardIndex].question;
         $('#card').attr('src', displayCard);
         
         $('.flashcard').show();
         $('#flipCard').show().text('Посмотреть состав');
+        $('#flipCard-mobile').show().text('Посмотреть состав');
         isShowingAnswer = false;
-    });
+    }
 
-    // Обработчик кнопки переворота карточки
-    $('#flipCard').on('click', function() {
+    // Общая функция для переворота карточки
+    function flipCard() {
         if (isShowingAnswer) {
             // Показываем вопрос
             var displayCard = cards[currentCardIndex].question;
             $('#card').attr('src', displayCard);
-            $(this).text('Посмотреть состав');
+            $('#flipCard').text('Посмотреть состав');
+            $('#flipCard-mobile').text('Посмотреть состав');
             isShowingAnswer = false;
         } else {
             // Показываем ответ
             var displayAnswer = cards[currentCardIndex].answer;
             $('#card').attr('src', displayAnswer);
-            $(this).text('Посмотреть фото');
+            $('#flipCard').text('Посмотреть фото');
+            $('#flipCard-mobile').text('Посмотреть фото');
             isShowingAnswer = true;
         }
-    });
+    }
+
+    // Обработчики для верхних кнопок
+    $('#question').on('click', showCard);
+    $('#flipCard').on('click', flipCard);
+
+    // Обработчики для нижних кнопок (мобильные)
+    $('#question-mobile').on('click', showCard);
+    $('#flipCard-mobile').on('click', flipCard);
 
     // Стили для кнопок при наведении и нажатии
-    $('#question, #flipCard')
+    $('.btn')
         .on("mousedown", function() {
             $(this).css("background-color", "#b32e2e");
         })
