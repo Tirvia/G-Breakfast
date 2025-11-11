@@ -21,7 +21,6 @@ $(document).ready(function() {
         {id:18, question:'./images/Яйца Бенедикт с цыпленком.png', answer:'./images/Яйца Бенедикт с цыпленком1.png'}
     ];
 
-    
    
     var currentCardIndex;
     var isShowingAnswer = false;
@@ -67,11 +66,11 @@ $(document).ready(function() {
         }
     }
 
-    // Обработчики для верхних кнопок
+    // Обработчики для десктопных кнопок
     $('#question').on('click', showCard);
     $('#flipCard').on('click', flipCard);
 
-    // Обработчики для нижних кнопок (мобильные)
+    // Обработчики для мобильных кнопок
     $('#question-mobile').on('click', showCard);
     $('#flipCard-mobile').on('click', flipCard);
 
