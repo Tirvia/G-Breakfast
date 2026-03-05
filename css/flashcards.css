@@ -164,26 +164,37 @@ footer p {
     width: 100%;
 }
 
-/* Адаптивность */
+/* Адаптивность для мобильных устройств */
 @media screen and (max-width: 768px) {
+    .head {
+        padding: 5px 0; /* Уменьшен отступ сверху/снизу заголовка */
+    }
+
     .head h2 {
         font-size: 2rem;
     }
     
+    .section {
+        padding-top: 0; /* Убран отступ между заголовками */
+    }
+
     .section h2 {
         font-size: 1.5rem;
+        margin-bottom: 5px; /* Уменьшен отступ до кнопок */
     }
     
+    /* Скрываем десктопные кнопки */
     .desktop-buttons {
         display: none !important;
     }
     
+    /* Показываем мобильные кнопки */
     .mobile-buttons {
         display: flex !important;
         flex-direction: column;
         align-items: center;
         width: 100%;
-        margin-top: 20px;
+        margin-top: 10px; /* Небольшой отступ сверху */
     }
     
     .mobile-buttons-row {
@@ -206,6 +217,10 @@ footer p {
         max-width: 90%;
         padding: 15px;
     }
+
+    .flashcard-container {
+        margin: 10px 0; /* Уменьшены внешние отступы карточки вдвое */
+    }
 }
 
 @media screen and (max-width: 480px) {
@@ -215,6 +230,7 @@ footer p {
     
     .section h2 {
         font-size: 1.3rem;
+        margin-bottom: 5px;
     }
     
     .btn {
@@ -225,5 +241,9 @@ footer p {
     
     .mobile-buttons-row {
         gap: 8px;
+    }
+
+    .flashcard-container {
+        margin: 8px 0; /* Ещё немного уменьшено для совсем маленьких экранов */
     }
 }
