@@ -18,9 +18,8 @@ $(document).ready(function() {
     ];
 
     var currentCardIndex;
-    var isShowingAnswer = false;
     
-    // Инициализация
+    // Инициализация: скрываем карточку и кнопку переворота
     $('.flashcard').hide();
     $('#flipCard').hide();
     $('#flipCard-mobile').hide();
@@ -30,34 +29,35 @@ $(document).ready(function() {
         return Math.floor(Math.random() * cards.length);
     }
 
-    // Общая функция для показа карточки
+    // Показать новую карточку (обе стороны)
     function showCard() {
         currentCardIndex = getRandomCard();
-        var displayCard = cards[currentCardIndex].question;
-        $('#card').attr('src', displayCard);
         
+        // Устанавливаем изображения для передней и задней сторон
+        $('#frontImg').attr('src', cards[currentCardIndex].question);
+        $('#backImg').attr('src', cards[currentCardIndex].answer);
+        
+        // Сбрасываем переворот (показываем лицевую сторону)
+        $('.flashcard').removeClass('flipped');
+        
+        // Показываем карточку и кнопку переворота
         $('.flashcard').show();
         $('#flipCard').show().text('Посмотреть состав');
         $('#flipCard-mobile').show().text('Посмотреть состав');
-        isShowingAnswer = false;
     }
 
-    // Общая функция для переворота карточки
+    // Перевернуть карточку (добавить/удалить класс flipped)
     function flipCard() {
-        if (isShowingAnswer) {
-            // Показываем вопрос
-            var displayCard = cards[currentCardIndex].question;
-            $('#card').attr('src', displayCard);
-            $('#flipCard').text('Посмотреть состав');
-            $('#flipCard-mobile').text('Посмотреть состав');
-            isShowingAnswer = false;
-        } else {
-            // Показываем ответ
-            var displayAnswer = cards[currentCardIndex].answer;
-            $('#card').attr('src', displayAnswer);
+        // Переключаем класс flipped на контейнере .flashcard
+        $('.flashcard').toggleClass('flipped');
+        
+        // Меняем текст кнопок в зависимости от того, перевёрнута ли карточка
+        if ($('.flashcard').hasClass('flipped')) {
             $('#flipCard').text('Посмотреть фото');
             $('#flipCard-mobile').text('Посмотреть фото');
-            isShowingAnswer = true;
+        } else {
+            $('#flipCard').text('Посмотреть состав');
+            $('#flipCard-mobile').text('Посмотреть состав');
         }
     }
 
