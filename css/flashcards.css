@@ -33,7 +33,7 @@ body {
 
 .section {
     background-size: cover;
-    padding: 20px 15px;
+    padding: 10px 15px; /* Уменьшен верхний отступ */
     text-align: center;
     flex: 1;
     display: flex;
@@ -46,7 +46,7 @@ body {
     color: #f0cece;
     text-shadow: 2px 2px 2px black;
     font-size: 1.8rem;
-    margin-bottom: 20px;
+    margin-bottom: 10px; /* Уменьшен нижний отступ */
 }
 
 .buttons-container {
@@ -78,21 +78,55 @@ body {
     background-color: #b32e2e;
 }
 
+/* Контейнер флип-карточки */
 .flashcard-container {
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 20px 0;
     width: 100%;
+    perspective: 1000px; /* 3D-эффект */
 }
 
 .flashcard {
-    background: white;
+    background: transparent;
     border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     max-width: 500px;
     width: 100%;
+    height: auto;
+}
+
+.flashcard-inner {
+    position: relative;
+    width: 100%;
+    height: auto;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    border-radius: 10px;
+}
+
+.flipped .flashcard-inner {
+    transform: rotateY(180deg);
+}
+
+.flashcard-front, .flashcard-back {
+    position: relative;
+    width: 100%;
+    height: auto;
+    backface-visibility: hidden;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flashcard-back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: rotateY(180deg);
 }
 
 .card-image {
@@ -101,6 +135,7 @@ body {
     max-height: 400px;
     object-fit: contain;
     border-radius: 5px;
+    display: block;
 }
 
 footer {
@@ -116,7 +151,7 @@ footer p {
     margin: 0;
 }
 
-/* Стили для мобильных кнопок (скрыты по умолчанию) */
+/* Мобильные кнопки */
 .mobile-buttons {
     display: none;
 }
@@ -129,7 +164,7 @@ footer p {
     width: 100%;
 }
 
-/* Адаптивность для мобильных устройств */
+/* Адаптивность */
 @media screen and (max-width: 768px) {
     .head h2 {
         font-size: 2rem;
@@ -139,12 +174,10 @@ footer p {
         font-size: 1.5rem;
     }
     
-    /* Скрываем десктопные кнопки на мобильных */
     .desktop-buttons {
         display: none !important;
     }
     
-    /* Показываем мобильные кнопки */
     .mobile-buttons {
         display: flex !important;
         flex-direction: column;
